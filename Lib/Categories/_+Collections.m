@@ -395,8 +395,8 @@
     NSAssert(_.isArray(list) || _.isDictionary(list), @"each expecting NSArray or NSDictionary");
 #endif
 
-    _SortByBlock iterator = _.isBlock(iteratorOrKey) ? (_SortByBlock) iteratorOrKey : ^(NSO* value, ...){
-      return value.get(iteratorOrKey); 
+    _SortByBlock iterator = _.isBlock(iteratorOrKey) ? (_SortByBlock) iteratorOrKey : ^id(id value, ...){
+      return ((NSO*)value).get(iteratorOrKey);
     };
 
     return _.chain(list)
@@ -421,8 +421,8 @@
     NSAssert(_.isArray(list) || _.isDictionary(list), @"each expecting NSArray or NSDictionary");
 #endif
 
-    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^(NSO* value, ... /* KEY, LIST */){
-      return value.get(iteratorOrKey); 
+    _GroupByBlock iterator = _.isBlock(iteratorOrKey) ? (_GroupByBlock) iteratorOrKey : ^id(id value, ... /* KEY, LIST */){
+      return ((NSO*)value).get(iteratorOrKey);
     };
     
     __block O* result = O.new;
